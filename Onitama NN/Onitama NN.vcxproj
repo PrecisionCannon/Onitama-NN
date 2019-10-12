@@ -84,9 +84,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Murdoch\Documents\GitHub\fann\src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>fannfloatd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Murdoch\Documents\GitHub\fann\src\include;C:\Users\Murdoch\Documents\GitHub\Onitama-NN;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -119,6 +121,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Onitama NN.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="fannfloatd.dll" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
