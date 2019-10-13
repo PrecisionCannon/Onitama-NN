@@ -120,7 +120,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Onitama NN.cpp" />
+    <ClCompile Include="XOR train.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fannfloatd.dll" />

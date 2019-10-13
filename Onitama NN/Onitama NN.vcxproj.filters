@@ -15,11 +15,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Onitama NN.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <None Include="fannfloatd.dll" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="fannfloatd.dll" />
+    <ClCompile Include="XOR train.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
