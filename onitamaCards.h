@@ -4,14 +4,16 @@ namespace OnitamaCards {
 			{1, 0},
 			{0, -1},
 			{0, 1},
-			NULL
+			{0, 0},
+			{0, 0}
 		};
 	const int cobraMoves[5][2]
 		={
 			{1, 1},
 			{0, -1},
 			{-1, 1},
-			NULL
+			{0, 0},
+			{0, 0}
 		};
 	const int gooseMoves[5][2]
 		= {
@@ -19,19 +21,22 @@ namespace OnitamaCards {
 			{0, -1},
 			{0, 1},
 			{-1, 1},
-			NULL
+			{0, 0}
 		};
 	const int mantisMoves[5][2]
 		= {
 			{1, -1},
 			{1, 1},
 			{-1, 0},
-			NULL
+			{0, 0},
+			{0, 0}
 		};
 	const int tigerMoves[5][2]
 		= {
 			{2, 0},
 			{-1, 0},
-			NULL
+			{0, 0},
+			{0, 0},
+			{0, 0}
 		};
 };
