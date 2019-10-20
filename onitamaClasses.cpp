@@ -30,31 +30,44 @@ bool PawnPosition::operator !=(PawnPosition other) {
 }
 
 PawnPosition PawnPosition::operator ++() {
-	if (row >= onitamaBoardLength) {
-		if (col >= onitamaBoardLength) {
+	if (col >= onitamaBoardLength) {
+		if (row >= onitamaBoardLength) {
 			setPosition(1, 0); //(1, 0) is the "dead" position, and will iterate to the first valid position
 		}
-		row = 1;
-		col++;
+		col = 1;
+		row++;
 	}
 	else {
-		row++;
+		col++;
 	}
 
 	return PawnPosition(row, col);
 }
 
-BoardState::BoardState(int arrangePieces) {
+std::ostream& operator <<(std::ostream& stream, const PawnPosition& p) {
+	stream << p.row << "," << p.col;
+
+	return stream;
+}
+
+BoardState::BoardState(bool arrangePieces) {
 	if (arrangePieces) {
 		srand(time(0));
 
 		for (int i = 0; i < 5; i++) {
 			friendlyPawn[i].setPosition(1, i + 1);
 			enemyPawn[i].setPosition(5, i + 1);
-
+			card[i] = undefined;
+		}
+		for (int i = 0; i < 5; i++) {
 			do {
 				card[i] = static_cast<CardOwner> ((rand() % enemy) + 1);
-			} while (checkCardsValid());
+			} while (!checkCardsValid());
+		}
+	}
+	else {
+		for (int i = 0; i < 5; i++) {
+			card[i] = undefined;
 		}
 	}
 }
@@ -100,25 +113,29 @@ bool BoardState::checkPiecesValid() {
 
 	for (int i = 0; i < 5; i++) {
 		for (int j = i; j < 5; j++) {
-			if (friendlyPawn[i] == friendlyPawn[j] || friendlyPawn[i] == enemyPawn[j]) {
-				if (!(friendlyPawn[i] == dead)) {
+			std::cout << friendlyPawn[i] << " " << enemyPawn[i] << "\n";
+			if (j != i) {
+				if (friendlyPawn[i] != dead && (friendlyPawn[i] == friendlyPawn[j] || friendlyPawn[i] == enemyPawn[j])) {
+					return false;
+				}
+				std::cout << "mark";
+				if (enemyPawn[i] == enemyPawn[j] && enemyPawn[i] != dead) {
 					return false;
 				}
 			}
-			if (enemyPawn[i] == enemyPawn[j] && !(enemyPawn[i] == dead)) {
-				return false;
-			}
 		}
 	}
+
+	return true;
 }
 
 bool BoardState::checkCardsValid() {
-	int numOfType[3] = { 0, 0, 0 }; //first is number of friendly cards, second is number of neutral, third is number of enemy
+	int numOfType[4] = { 0, 0, 0, 0 }; //first is number of friendly cards, second is number of neutral, third is number of enemy
 	for (int i = 0; i < 5; i++) {
-		numOfType[card[i] - 1]++;
+		numOfType[card[i]]++;
 	}
 
-	if (numOfType[0] > 2 || numOfType[1] > 1 || numOfType[2] > 2) {
+	if (numOfType[1] > 2 || numOfType[2] > 1 || numOfType[3] > 2) {
 		return false;
 	}
 	return true;

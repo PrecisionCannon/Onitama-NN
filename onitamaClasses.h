@@ -1,3 +1,5 @@
+#include <iostream>
+
 #define onitamaBoardLength 5
 
 class PawnPosition {
@@ -14,14 +16,16 @@ public:
 	PawnPosition operator ++();
 };
 
+std::ostream& operator <<(std::ostream& stream, const PawnPosition& p);
+
 class BoardState {
 public:
-	enum CardOwner { friendly = 1, neutral = 2, enemy = 3 };
+	enum CardOwner { undefined = 0, friendly = 1, neutral = 2, enemy = 3 };
 	CardOwner card[5];
 	PawnPosition friendlyPawn[5];
 	PawnPosition enemyPawn[5];
 
-	BoardState(int arrangePieces);
+	BoardState(bool arrangePieces);
 	BoardState(CardOwner* cardOwnerArray);
 	bool operator==(BoardState other);
 	bool operator!=(BoardState other);

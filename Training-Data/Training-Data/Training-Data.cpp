@@ -24,8 +24,9 @@ void incrementBoard(BoardState board) {
 	PawnPosition end(5, 5);
 	do {
 		for (int i = 0; i < 5; i++) { //iterate with enemy pawns
-			if (!(board.friendlyPawn[i] == end)) {
+			if (board.friendlyPawn[i] != end) {
 				++board.friendlyPawn[i]; //iterate this pawn
+				break;
 			}
 			else {
 				if (i < 4) {
@@ -34,8 +35,9 @@ void incrementBoard(BoardState board) {
 				}
 				else {
 					for (int k = 0; k < 5; k++) { //iterate with enemy pawns
-						if (!(board.enemyPawn[i] == end)) {
-							++board.enemyPawn[i]; //iterate this pawn
+						if (board.enemyPawn[k] != end) {
+							++board.enemyPawn[k]; //iterate this pawn
+							break;
 						}
 						else {
 							if (k < 4) {
@@ -46,6 +48,7 @@ void incrementBoard(BoardState board) {
 								for (int m = 0; m < 5; m++) {
 									if (board.card[m] != BoardState::enemy) {
 										incrementCardOwner(board.card[m]);
+										break;
 									}
 									else {
 										if (m < 4) {
@@ -68,14 +71,12 @@ void incrementBoard(BoardState board) {
 				}
 			}
 		}
-
-
 	} while (!board.checkValid()); // iterate until board config is valid
 }
 
 int main() {
-	BoardState board(0);
-	BoardState initalBoard(0);
+	BoardState board(false);
+	BoardState initalBoard(false);
 	std::ofstream dataFile;
 	dataFile.open("trainingData.csv");
 
